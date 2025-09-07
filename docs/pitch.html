@@ -17,30 +17,24 @@
             color: #ffffff;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            height: 100dvh; /* Dynamic viewport height for mobile */
-            overflow: hidden;
+            min-height: 100vh;
+            min-height: 100dvh; /* Dynamic viewport height for mobile */
             position: relative;
         }
 
         .presentation-container {
-            width: 100vw;
-            height: 100vh;
-            height: 100dvh; /* Dynamic viewport height for mobile */
+            width: 100%;
+            min-height: calc(100vh - 100px); /* Account for top navigation */
+            min-height: calc(100dvh - 100px); /* Dynamic viewport height for mobile */
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: 80px; /* Space for top elements */
-            padding-bottom: 100px; /* Space for bottom controls */
+            padding-top: 120px; /* Space for top navigation */
+            padding-bottom: 40px; /* Bottom padding */
         }
 
         .slide {
             width: 90%;
             max-width: 1200px;
-            height: calc(100vh - 180px); /* Account for top and bottom spacing */
-            height: calc(100dvh - 180px); /* Dynamic viewport height for mobile */
-            position: absolute;
+            margin: 0 auto 40px auto; /* Center and add bottom margin */
             background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(10, 10, 10, 0.95) 100%);
             border-radius: 20px;
             padding: 60px;
@@ -49,9 +43,6 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
 
         .slide.active {
@@ -152,17 +143,65 @@
             transform: scale(1.05);
         }
 
-        .controls {
+        .top-navigation {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
-            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
             z-index: 1000;
-            width: auto;
-            max-width: 90vw;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .arrow-btn {
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(243, 156, 18, 0.3);
+            display: flex;
+            align-items: center;
             justify-content: center;
+        }
+
+        .arrow-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.5);
+        }
+
+        .arrow-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
         }
 
         button {
@@ -189,13 +228,9 @@
         }
 
         .slide-indicator {
-            position: fixed;
-            top: 30px;
-            right: 30px;
             font-size: 1.2em;
             color: #95a5a6;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.1);
             padding: 10px 15px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
@@ -361,15 +396,40 @@
 
         @media (max-width: 768px) {
             .presentation-container {
-                padding-top: 100px; /* More space for mobile top elements */
-                padding-bottom: 120px; /* More space for mobile bottom controls */
+                padding-top: 100px; /* Space for top navigation */
+                padding-bottom: 20px;
             }
             
             .slide {
                 padding: 20px;
-                height: calc(100vh - 220px); /* Account for mobile spacing */
-                height: calc(100dvh - 220px); /* Dynamic viewport height for mobile */
                 width: 95%; /* Slightly wider on mobile */
+                margin: 0 auto 20px auto;
+            }
+            
+            .top-navigation {
+                height: 80px;
+                padding: 0 15px;
+            }
+            
+            .arrow-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1em;
+            }
+            
+            .slide-indicator {
+                font-size: 1em;
+                padding: 8px 12px;
+            }
+            
+            .language-toggle {
+                gap: 8px;
+                padding: 6px 10px;
+            }
+            
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 0.8em;
             }
             
             h1 {
@@ -404,40 +464,6 @@
                 width: 150px;
                 height: 150px;
                 font-size: 3em;
-            }
-            
-            .controls {
-                bottom: 20px;
-                gap: 10px;
-                padding: 0 20px; /* Add horizontal padding */
-            }
-            
-            button {
-                padding: 10px 20px;
-                font-size: 0.85em;
-                flex: 1; /* Make buttons equal width */
-                max-width: 120px;
-            }
-            
-            .slide-indicator {
-                top: 20px;
-                right: 20px;
-                font-size: 1em;
-                background: rgba(0, 0, 0, 0.7);
-                padding: 8px 12px;
-                border-radius: 15px;
-                backdrop-filter: blur(10px);
-            }
-            
-            .language-toggle {
-                top: 20px;
-                left: 20px;
-                gap: 8px;
-            }
-            
-            .lang-btn {
-                padding: 6px 12px;
-                font-size: 0.8em;
             }
             
             .museum-images {
@@ -481,41 +507,40 @@
         /* Extra small mobile devices */
         @media (max-width: 480px) {
             .presentation-container {
-                padding-top: 120px; /* Even more space for very small screens */
-                padding-bottom: 140px;
+                padding-top: 80px; /* Space for top navigation */
+                padding-bottom: 20px;
             }
             
             .slide {
                 padding: 15px;
-                height: calc(100vh - 260px);
-                height: calc(100dvh - 260px);
                 width: 98%;
+                margin: 0 auto 15px auto;
             }
             
-            .language-toggle {
-                top: 15px;
-                left: 15px;
-                padding: 6px 10px;
-                gap: 6px;
+            .top-navigation {
+                height: 70px;
+                padding: 0 10px;
             }
             
-            .slide-indicator {
-                top: 15px;
-                right: 15px;
-                padding: 6px 10px;
+            .arrow-btn {
+                width: 35px;
+                height: 35px;
                 font-size: 0.9em;
             }
             
-            .controls {
-                bottom: 15px;
-                gap: 8px;
-                padding: 0 15px;
+            .slide-indicator {
+                font-size: 0.9em;
+                padding: 6px 10px;
             }
             
-            button {
-                padding: 8px 16px;
-                font-size: 0.8em;
-                max-width: 100px;
+            .language-toggle {
+                gap: 6px;
+                padding: 5px 8px;
+            }
+            
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.75em;
             }
             
             h1 {
@@ -550,13 +575,9 @@
         }
 
         .language-toggle {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            z-index: 1000;
             display: flex;
             gap: 10px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.1);
             padding: 8px 12px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
@@ -597,16 +618,29 @@
 <body>
     <div class="animated-bg"></div>
     
-    <div class="language-toggle">
-        <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
-        <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
+    <div class="top-navigation">
+        <div class="nav-left">
+            <div class="language-toggle">
+                <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
+            </div>
+        </div>
+        
+        <div class="nav-center">
+            <!-- Empty center for now -->
+        </div>
+        
+        <div class="nav-right">
+            <button class="arrow-btn" id="prev-btn" onclick="changeSlide(-1)">←</button>
+            <div class="slide-indicator">
+                <span class="lang-content en active">Slide <span id="current-slide">1</span> / <span id="total-slides">10</span></span>
+                <span class="lang-content fr">Diapositive <span id="current-slide-fr">1</span> / <span id="total-slides-fr">10</span></span>
+            </div>
+            <button class="arrow-btn" id="next-btn" onclick="changeSlide(1)">→</button>
+        </div>
     </div>
     
     <div class="presentation-container">
-        <div class="slide-indicator">
-            <span class="lang-content en active">Slide <span id="current-slide">1</span> / <span id="total-slides">10</span></span>
-            <span class="lang-content fr">Diapositive <span id="current-slide-fr">1</span> / <span id="total-slides-fr">10</span></span>
-        </div>
 
         <!-- Slide 1: Title -->
         <div class="slide active">
@@ -1062,17 +1096,6 @@
         </div>
     </div>
 
-    <div class="controls">
-        <button id="prev-btn" onclick="changeSlide(-1)">
-            <span class="lang-content en active">← Previous</span>
-            <span class="lang-content fr">← Précédent</span>
-        </button>
-        <button id="next-btn" onclick="changeSlide(1)">
-            <span class="lang-content en active">Next →</span>
-            <span class="lang-content fr">Suivant →</span>
-        </button>
-    </div>
-
     <script>
         let currentSlide = 1;
         const totalSlides = 10;
@@ -1124,6 +1147,12 @@
             // Update button states
             document.getElementById('prev-btn').disabled = currentSlide === 1;
             document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+            
+            // Scroll to the active slide
+            slides[currentSlide - 1].scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
         }
 
         function changeSlide(direction) {
