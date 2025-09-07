@@ -70,6 +70,7 @@
             font-weight: 700;
             margin-bottom: 30px;
             background: linear-gradient(135deg, #f39c12, #e74c3c);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
@@ -177,32 +178,6 @@
             gap: 20px;
         }
 
-        .arrow-btn {
-            background: linear-gradient(135deg, #f39c12, #e74c3c);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            box-shadow: 0 5px 20px rgba(243, 156, 18, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .arrow-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.5);
-        }
-
-        .arrow-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
 
         button {
             background: linear-gradient(135deg, #f39c12, #e74c3c);
@@ -227,15 +202,6 @@
             cursor: not-allowed;
         }
 
-        .slide-indicator {
-            font-size: 1.2em;
-            color: #95a5a6;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 15px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
 
         .founder-profile {
             display: flex;
@@ -411,15 +377,20 @@
                 padding: 0 15px;
             }
             
-            .arrow-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1em;
+            .nav-arrow-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 0.8em;
             }
             
             .slide-indicator {
-                font-size: 1em;
-                padding: 8px 12px;
+                font-size: 0.8em;
+                padding: 5px 10px;
+            }
+            
+            .slide-navigation {
+                gap: 6px;
+                padding: 5px 8px;
             }
             
             .language-toggle {
@@ -522,15 +493,20 @@
                 padding: 0 10px;
             }
             
-            .arrow-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 0.9em;
+            .nav-arrow-btn {
+                width: 24px;
+                height: 24px;
+                font-size: 0.75em;
             }
             
             .slide-indicator {
-                font-size: 0.9em;
-                padding: 6px 10px;
+                font-size: 0.75em;
+                padding: 4px 8px;
+            }
+            
+            .slide-navigation {
+                gap: 4px;
+                padding: 4px 6px;
             }
             
             .language-toggle {
@@ -613,6 +589,54 @@
         .lang-content.active {
             display: block;
         }
+
+        .slide-navigation {
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 10px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            align-items: center;
+        }
+
+        .nav-arrow-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-arrow-btn:hover {
+            background: rgba(243, 156, 18, 0.3);
+            border-color: #f39c12;
+        }
+
+        .nav-arrow-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .slide-indicator {
+            font-size: 0.9em;
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -631,12 +655,14 @@
         </div>
         
         <div class="nav-right">
-            <button class="arrow-btn" id="prev-btn" onclick="changeSlide(-1)">←</button>
-            <div class="slide-indicator">
-                <span class="lang-content en active">Slide <span id="current-slide">1</span> / <span id="total-slides">10</span></span>
-                <span class="lang-content fr">Diapositive <span id="current-slide-fr">1</span> / <span id="total-slides-fr">10</span></span>
+            <div class="slide-navigation">
+                <button class="nav-arrow-btn" id="prev-btn" onclick="changeSlide(-1)">←</button>
+                <div class="slide-indicator">
+                    <span class="lang-content en active"><span id="current-slide">1</span> / <span id="total-slides">10</span></span>
+                    <span class="lang-content fr"><span id="current-slide-fr">1</span> / <span id="total-slides-fr">10</span></span>
+                </div>
+                <button class="nav-arrow-btn" id="next-btn" onclick="changeSlide(1)">→</button>
             </div>
-            <button class="arrow-btn" id="next-btn" onclick="changeSlide(1)">→</button>
         </div>
     </div>
     
@@ -1148,8 +1174,9 @@
             document.getElementById('prev-btn').disabled = currentSlide === 1;
             document.getElementById('next-btn').disabled = currentSlide === totalSlides;
             
-            // Scroll to the active slide
-            slides[currentSlide - 1].scrollIntoView({ 
+            // Scroll to the top of the presentation container
+            const presentationContainer = document.querySelector('.presentation-container');
+            presentationContainer.scrollIntoView({ 
                 behavior: 'smooth', 
                 block: 'start' 
             });
