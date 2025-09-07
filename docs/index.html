@@ -64,12 +64,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
         h1 {
             font-size: 3.5em;
             font-weight: 700;
@@ -300,6 +294,25 @@
             animation: fadeIn 0.8s ease-out 0.7s both;
         }
 
+        .current-phase {
+            grid-column: span 2;
+            position: relative;
+        }
+
+        .current-phase::before {
+            content: "IN PROGRESS";
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+        }
+
         ul {
             list-style: none;
             padding-left: 0;
@@ -385,8 +398,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4em;
-            animation: pulse 2s infinite;
         }
 
         .language-toggle {
@@ -697,7 +708,9 @@
             <h2 class="lang-content en active">Meet Our Founders</h2>
             <h2 class="lang-content fr">Rencontrez Nos Fondateurs</h2>
             <div class="founder-profile">
-                <div class="founder-image">AA</div>
+                <div class="founder-image">
+                    <img src="abdellah.png" alt="Abdellah Abdellaoui" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
                 <div class="founder-info">
                     <h3 style="color: #f39c12;">Abdellah Abdellaoui</h3>
                     <p class="lang-content en active" style="font-size: 1.1em; color: #95a5a6; margin-bottom: 20px;">
@@ -739,7 +752,9 @@
             <h2 class="lang-content en active">Technology Meets Tradition</h2>
             <h2 class="lang-content fr">La Technologie Rencontre la Tradition</h2>
             <div class="founder-profile">
-                <div class="founder-image">NA</div>
+                <div class="founder-image">
+                    <img src="nabil.jpg" alt="Nabil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
                 <div class="founder-info">
                     <h3 style="color: #f39c12;">Nabil Abdellaoui</h3>
                     <p class="lang-content en active" style="font-size: 1.1em; color: #95a5a6; margin-bottom: 20px;">
@@ -792,28 +807,28 @@
             <h2 class="lang-content fr">Alimenté par l'Innovation</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <span class="icon">⛓️</span>
+                    <img src="bridge.png" alt="Blockchain Infrastructure" style="width: 75px; height: 75px; object-fit: contain; margin-bottom: 20px;">
                     <h3 class="lang-content en active">Blockchain Infrastructure</h3>
                     <h3 class="lang-content fr">Infrastructure Blockchain</h3>
                     <p class="lang-content en active">Transparent, immutable records of ownership and transactions</p>
                     <p class="lang-content fr">Enregistrements transparents et immuables de propriété et transactions</p>
                 </div>
                 <div class="feature-card">
-                    <span class="icon">📜</span>
+                    <img src="roundabout.png" alt="Smart Contracts" style="width: 75px; height: 75px; object-fit: contain; margin-bottom: 20px;">
                     <h3 class="lang-content en active">Smart Contracts</h3>
                     <h3 class="lang-content fr">Contrats Intelligents</h3>
                     <p class="lang-content en active">Automated governance and revenue distribution</p>
                     <p class="lang-content fr">Gouvernance automatisée et distribution des revenus</p>
                 </div>
                 <div class="feature-card">
-                    <span class="icon">🪙</span>
+                    <img src="animals.png" alt="NFT Integration" style="width: 75px; height: 75px; object-fit: contain; margin-bottom: 20px;">
                     <h3 class="lang-content en active">NFT Integration</h3>
                     <h3 class="lang-content fr">Intégration NFT</h3>
                     <p class="lang-content en active">Digital certificates for special access and experiences</p>
                     <p class="lang-content fr">Certificats numériques pour accès spéciaux et expériences</p>
                 </div>
                 <div class="feature-card">
-                    <span class="icon">🌐</span>
+                    <img src="airport.png" alt="Global Platform" style="width: 75px; height: 75px; object-fit: contain; margin-bottom: 20px;">
                     <h3 class="lang-content en active">Global Platform</h3>
                     <h3 class="lang-content fr">Plateforme Mondiale</h3>
                     <p class="lang-content en active">Seamless international participation and access</p>
@@ -836,12 +851,16 @@
 
         <!-- Slide 10: Call to Action -->
         <div class="slide">
-            <h1 class="lang-content en active">Join the Revolution</h1>
-            <h1 class="lang-content fr">Rejoignez la Révolution</h1>
-            <p class="subtitle lang-content en active">Be Part of Automotive History</p>
-            <p class="subtitle lang-content fr">Faites Partie de l'Histoire Automobile</p>
+            <h1 class="lang-content en active">Our Plan</h1>
+            <h1 class="lang-content fr">Notre Plan</h1>
             <div style="text-align: center; margin: 40px 0;">
                 <div class="feature-grid" style="max-width: 800px; margin: 0 auto;">
+                    <div class="feature-card current-phase">
+                        <h3 class="lang-content en active">Phase 0: Start</h3>
+                        <h3 class="lang-content fr">Phase 0 : Démarrage</h3>
+                        <p class="lang-content en active">Initial founding panel<br>Legal design and implementation<br>Technical build</p>
+                        <p class="lang-content fr">Panel fondateur initial<br>Conception et mise en œuvre légale<br>Développement technique</p>
+                    </div>
                     <div class="feature-card">
                         <h3 class="lang-content en active">Phase 1: Launch</h3>
                         <h3 class="lang-content fr">Phase 1 : Lancement</h3>
@@ -870,19 +889,13 @@
             </div>
             <div style="background: linear-gradient(135deg, rgba(243, 156, 18, 0.2), rgba(231, 76, 60, 0.2)); 
                         padding: 30px; border-radius: 15px; margin-top: 40px;">
-                <h3 class="lang-content en active" style="text-align: center; margin-bottom: 20px;">Get Started Today</h3>
-                <h3 class="lang-content fr" style="text-align: center; margin-bottom: 20px;">Commencez Aujourd'hui</h3>
+                <h3 class="lang-content en active" style="text-align: center; margin-bottom: 20px;">Join Us and Be Part of Automotive History</h3>
+                <h3 class="lang-content fr" style="text-align: center; margin-bottom: 20px;">Rejoignez-nous et Faites Partie de l'Histoire Automobile</h3>
                 <p class="lang-content en active" style="text-align: center; font-size: 1.3em;">
-                    🚀 <span class="highlight">Early Bird Benefits Available</span> 🚀
+                    We are in the early ideation phase and looking for partners to compose the initial founding panel.
                 </p>
                 <p class="lang-content fr" style="text-align: center; font-size: 1.3em;">
-                    🚀 <span class="highlight">Avantages Early Bird Disponibles</span> 🚀
-                </p>
-                <p class="lang-content en active" style="text-align: center; margin-top: 20px;">
-                    Contact: info@retroparcdao.com | www.retroparcdao.com
-                </p>
-                <p class="lang-content fr" style="text-align: center; margin-top: 20px;">
-                    Contact : info@retroparcdao.com | www.retroparcdao.com
+                    Nous sommes dans la phase d'idéation précoce et recherchons des partenaires pour composer le panel fondateur initial.
                 </p>
             </div>
         </div>
